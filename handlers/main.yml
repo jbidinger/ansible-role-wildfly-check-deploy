@@ -4,7 +4,7 @@
   command: "/usr/local/bin/jboss stop"
 
 - name: wildfly cleanup clear undeployed
-  shell: "rm *.undeployed"
+  shell: "rm *.undeployed migration.log.lck"
   args:
     chdir: "/home/jboss/wildfly-8/standalone/deployments"
 
