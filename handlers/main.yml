@@ -13,4 +13,4 @@
   notify: wildfly cleanup jboss check
 
 - name: wildfly cleanup jboss check
-  wait_for: path="/home/jboss/wildfly-8/standalone/deployments/oracle-ds.xml.deployed" deley=10 timeout=90
+  wait_for: path="/home/jboss/wildfly-8/standalone/deployments/oracle-ds.xml.deployed" delay=10 timeout=90
