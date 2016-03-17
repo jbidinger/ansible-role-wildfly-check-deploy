@@ -1,0 +1,12 @@
+---
+
+- name: wildfly cleanup jboss stop
+  command: "/usr/local/bin/jboss stop"
+
+- name: wildfly cleanup clear undeployed
+  shell: "rm *.undeployed"
+  args:
+    chdir: "/home/jboss/wildfly-8/standalone/deployments"
+
+- name: wildfly cleanup jboss start
+  command: "/usr/local/bin/jboss start"

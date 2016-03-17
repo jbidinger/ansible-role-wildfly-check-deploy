@@ -1,0 +1,8 @@
+---
+galaxy_info:
+  author: Jon Bidinger <jbidinger@mgage.com>
+  description:
+  company: mGage
+  license: BSD
+
+dependencies: []

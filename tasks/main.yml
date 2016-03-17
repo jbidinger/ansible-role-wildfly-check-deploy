@@ -1,0 +1,14 @@
+---
+
+- name: "Look for undeployed items"
+  shell: "/usr/bin/test -f /home/jboss/wildfly-8/standalone/deployments/{{ item }}.undeployed"
+  register: result
+  changed_when: result.rc == 0
+  failed_when: false
+  notify: 
+    - wildfly cleanup jboss stop
+    - wildfly cleanup clear undeployed
+    - wildfly cleanup jboss start
+  with_items:
+     - "campaignpro-*.ear"
+     - "oracle-ds.xml"
