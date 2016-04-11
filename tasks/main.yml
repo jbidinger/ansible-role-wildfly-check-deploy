@@ -3,7 +3,7 @@
 - name: "Look for undeployed items"
   shell: "/usr/bin/test -f /home/jboss/wildfly-8/standalone/deployments/{{ item }}.undeployed"
   register: result
-  changed_when: result.rc == 0
+  changed_when: result.rc == 0 or wildfly_always_restart == "True"
   failed_when: false
   notify: 
     - wildfly cleanup jboss stop
