@@ -1,14 +1,12 @@
 ---
 
 - name: "Look for undeployed items"
-  shell: "/usr/bin/test -f /home/jboss/wildfly-8/standalone/deployments/{{ item }}.undeployed"
+  shell: "/usr/bin/test -f {{ wildfly_jboss_deploy_dir }}/{{ item }}.undeployed"
   register: result
-  changed_when: result.rc == 0 or wildfly_always_restart == "True"
+  changed_when: result.rc == 0 or "{{wildfly_always_restart}}" == "True"
   failed_when: false
   notify: 
     - wildfly cleanup jboss stop
     - wildfly cleanup clear undeployed
     - wildfly cleanup jboss start
-  with_items:
-     - "campaignpro-*.ear"
-     - "oracle-ds.xml"
+  with_items: "{{ wildfly_jboss_deploy_files }}"

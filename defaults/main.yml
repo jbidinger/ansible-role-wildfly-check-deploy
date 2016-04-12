@@ -1,2 +1,6 @@
 ---
 wildfly_always_restart: "False"
+wildfly_jboss_cmd: "/usr/local/bin/jboss"
+wildfly_jboss_deploy_dir: ""
+wildfly_waitfor_deploy: ""
+wildfly_jboss_deploy_files: []

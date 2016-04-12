@@ -1,16 +1,16 @@
 ---
 
 - name: wildfly cleanup jboss stop
-  command: "/usr/local/bin/jboss stop"
+  command: "{{wildfly_jboss_cmd}} stop"
 
 - name: wildfly cleanup clear undeployed
   shell: "rm *.undeployed migration.log.lck"
   args:
-    chdir: "/home/jboss/wildfly-8/standalone/deployments"
+    chdir: "{{wildfly_jboss_deploy_dir}}"
 
 - name: wildfly cleanup jboss start
-  command: "/usr/local/bin/jboss start"
+  command: "{{wildfly_jboss_cmd}} start"
   notify: wildfly cleanup jboss check
 
 - name: wildfly cleanup jboss check
-  wait_for: path="/home/jboss/wildfly-8/standalone/deployments/oracle-ds.xml.deployed" delay=10 timeout=90
+  wait_for: path="{{wildfly_waitfor_deploy}}" delay=10 timeout=90
