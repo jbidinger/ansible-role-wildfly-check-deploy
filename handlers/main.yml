@@ -4,9 +4,16 @@
   command: "{{wildfly_jboss_cmd}} stop"
 
 - name: wildfly cleanup clear undeployed
-  shell: "rm *.undeployed migration.log.lck"
-  args:
-    chdir: "{{wildfly_jboss_deploy_dir}}"
+  file:
+    path: "{{wildfly_jboss_deploy_dir}}/{item}.undeployed"
+    state: absent
+  notify: wildfly cleanup clear lock
+  with_items: "{{ wildfly_jboss_deploy_files }}"
+
+- name: wildfly cleanup clear lock
+  file:
+    path: "{{wildfly_jboss_deploy_dir}}/migration.log.lck"
+    state: absent
 
 - name: wildfly cleanup jboss start
   command: "{{wildfly_jboss_cmd}} start"
